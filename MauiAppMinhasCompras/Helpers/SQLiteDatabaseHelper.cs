@@ -46,7 +46,7 @@ namespace MauiAppMinhasCompras.Helpers
         // Busca por produtos cuja descrição contenha a string "q" e retorna uma lista de produtos correspondentes
         public Task<List<Produto>> Search(string q)
         {
-            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'";
+            string sql = "SELECT * FROM Produto WHERE descricao LIKE '%" + q + "%'";
             return _conn.QueryAsync<Produto>(sql);
         }
     }
