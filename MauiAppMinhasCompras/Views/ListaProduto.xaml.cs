@@ -146,4 +146,31 @@ public partial class ListaProduto : ContentPage
             lst_produtos.IsRefreshing = false;
         }
     }
+
+    private async void Relatorio_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var dados = lista
+                .GroupBy(p => p.Categoria)
+                .Select(g => new
+                {
+                    Categoria = g.Key,
+                    Total = g.Sum(p => p.Total)
+                });
+
+            string msg = "";
+
+            foreach (var item in dados)
+            {
+                msg += $"{item.Categoria}: {item.Total:C}\n";
+            }
+
+            await DisplayAlert("Relatório por Categoria", msg, "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", ex.Message, "OK");
+        }
+    }
 }

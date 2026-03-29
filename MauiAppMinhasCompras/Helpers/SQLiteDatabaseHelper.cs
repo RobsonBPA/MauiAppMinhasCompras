@@ -25,9 +25,9 @@ namespace MauiAppMinhasCompras.Helpers
         // Atualiza um produto existente com base no ID e retorna uma lista de produtos
         public Task<List<Produto>> Update(Produto p)
         {
-            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
+            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=?, Categoria=?, WHERE Id=?";
             return _conn.QueryAsync<Produto>(
-            sql, p.Descricao, p.Quantidade, p.Preco, p.Id
+            sql, p.Descricao, p.Quantidade, p.Preco, p.Categoria, p.Id
             );
         }
 
@@ -48,6 +48,13 @@ namespace MauiAppMinhasCompras.Helpers
         {
             string sql = "SELECT * FROM Produto WHERE descricao LIKE '%" + q + "%'";
             return _conn.QueryAsync<Produto>(sql);
+        }
+
+        // Busca por produtos que pertencem a uma categoria específica e retorna uma lista de produtos correspondentes
+        public Task<List<Produto>> GetByCategoria(string categoria)
+        {
+            string sql = "SELECT * FROM Produto WHERE Categoria = ?";
+            return _conn.QueryAsync<Produto>(sql, categoria);
         }
     }
 }

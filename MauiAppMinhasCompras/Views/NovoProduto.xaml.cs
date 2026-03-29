@@ -17,7 +17,8 @@ public partial class NovoProduto : ContentPage
 			{
 				// Obtém os valores inseridos pelo usuário
 				Descricao = txt_descricao.Text,
-				Quantidade = Convert.ToDouble(txt_quantidade.Text),
+                Categoria = txt_categoria.Text,
+                Quantidade = Convert.ToDouble(txt_quantidade.Text),
 				Preco = Convert.ToDouble(txt_preco.Text)
 			};
 
